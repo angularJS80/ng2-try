@@ -26,12 +26,14 @@ export class HeroDetailComponent implements OnInit {
   }
 
   getHero(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    //this.editable= this.route.snapshot.paramMap.get("editable");
-    this.hero = new Hero();
 
-    /*this.heroService.getHero(id)
-      .subscribe(hero => this.hero = hero);*/
+    this.hero = new Hero();
+    //const id = this.route.snapshot.paramMap.get('id');
+    //this.heroService.getHero(id)
+    //  .subscribe(hero => this.hero = hero);
+
+    this.hero= JSON.parse(this.route.snapshot.paramMap.get('heroStr'));
+
   }
 
   goBack(): void {

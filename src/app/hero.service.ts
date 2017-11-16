@@ -14,7 +14,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable() // 인젝터블이 먼가요?
+@Injectable() // 인젝터블이 먼가요? 서비스를 여러 컴포넌트에서 사용하기위해 걸어주는 데코레이터 입니다.
 export class HeroService {
   private heroesUrl = 'http://localhost:8080/hero/getList';  // URL to web api
 
@@ -123,7 +123,7 @@ getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
 
 
   /** Log a HeroService message with the MessageService */
-  private log(message: string) {
+  private log(message: any) {
     this.messageService.add('HeroService: ' + message);
   }
 
