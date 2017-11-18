@@ -13,7 +13,14 @@ import { MessagesComponent } from './messages/messages.component';
 import { HeroService } from './hero.service';
 import { MessageService } from './message.service';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
-
+import {LoginComponent} from "./login/login.component";
+import {RegisterComponent} from "./register/register.component";
+import {AuthGuard} from "./_guards/auth.guard";
+import {AlertService} from "./_services/alert.service";
+import {AuthenticationService} from "./_services/authentication.service";
+import {HttpModule} from "@angular/http";
+import {UserService} from "./_services/user.service";
+import {ApiRequestService} from './_services/apiRequest.service'
 
 
 
@@ -25,16 +32,25 @@ import { HeroSearchComponent } from './hero-search/hero-search.component';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
+    LoginComponent,
+    RegisterComponent
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [
     HeroService,
-    MessageService
+    MessageService,
+    AuthGuard,
+    AlertService,
+    AuthenticationService,
+    UserService,
+    ApiRequestService
   ],
   bootstrap: [AppComponent]
 })

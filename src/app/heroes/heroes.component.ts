@@ -24,7 +24,11 @@ export class HeroesComponent implements OnInit {
   }
 
   addHero(): void {
-    this.router.navigate(['addnew']);
+    let newHero:Hero = new Hero();
+    newHero.editable = true;
+    let heroStr:string = JSON.stringify(newHero);
+
+    this.router.navigate(['addnew',heroStr]);
     //this.addingHero = true;
     //this.selectedHero = null;
   }
@@ -36,7 +40,6 @@ export class HeroesComponent implements OnInit {
   }*/
 
   save(): void {
-
     /*this.heroService.updateHero(this.hero)
       .subscribe(() => this.goBack());*/
   }
@@ -57,6 +60,7 @@ export class HeroesComponent implements OnInit {
 
   gotoDetail(): void {
     //this.router.navigate(['/detail', this.selectedHero.id]);
+    this.selectedHero.editable = false;
     let heroStr:string = JSON.stringify(this.selectedHero);
     this.router.navigate(['/detail', heroStr]);
   }
@@ -68,7 +72,7 @@ export class HeroesComponent implements OnInit {
   ) { } // 컴포넌트초기화시 서비스를 생성자로 받는다.
 
   ngOnInit() { // 컴포넌트가 올라오는 시점에 영웅목록을 가져온다.
-    this.heroes = HEROES;
+    //this.heroes = HEROES;
 
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);

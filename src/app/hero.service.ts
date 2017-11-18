@@ -4,11 +4,11 @@ import { of } from 'rxjs/observable/of';
 
 import { Hero } from './heroes/hero';
 import { HEROES } from './mock-heroes';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-
+import { HttpClient, HttpHeaders, } from '@angular/common/http';
+import {Response} from '@angular/http';
 import {MessageService} from './message.service'
 import { catchError, map, tap } from 'rxjs/operators';
-
+import {ApiRequestService} from './_services/apiRequest.service'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,16 +19,33 @@ export class HeroService {
   private heroesUrl = 'http://localhost:8080/hero/getList';  // URL to web api
 
 getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
-    //return of(HEROES);
-
-  //return this.http.post(this.heroesUrl,{}).map(response => <Hero[]>response.rtnList.json().data);
-
-    return this.http.post<Hero[]>(this.heroesUrl,{})
+    /* return this.http.post<Hero[]>(this.heroesUrl,{})
       .pipe(
         map(response => <Hero[]>response["rtnList"]),
         tap(response=> this.log(response)),
         catchError(this.handleError('getHeroes', []))
+    );*/
+
+  //console.log(this.apirequestService.post('/hero/getList',{}));
+    return this.apirequestService.request('/hero/getList',{})
+      .pipe(
+      map(response => <Hero[]>(JSON.parse(response["_body"]).rtnList)),
+      tap(response=> console.log(response)),
+        catchError(this.handleError('getHeroes', []))
     );
+}
+
+  updateHero (hero: Hero): Observable<Hero> {
+    /*return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
+      tap(_ => this.log(`updated hero id=${hero.id}`)),
+      catchError(this.handleError<any>('updateHero'))
+    );*/
+    return this.apirequestService.request('/hero/reg',hero)
+      .pipe(
+        tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),
+        catchError(this.handleError<Hero>('updateHero'))
+      );
+
   }
 
   /** GET hero by id. Return `undefined` when id not found */
@@ -82,22 +99,6 @@ getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
     );
   }
 
-  /** POST: add a new hero to the server */
-  addHero (hero: Hero): Observable<Hero> {
-    return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
-      tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),
-      catchError(this.handleError<Hero>('addHero'))
-    );
-  }
-
-
-  updateHero (hero: Hero): Observable<any> {
-    return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
-      tap(_ => this.log(`updated hero id=${hero.id}`)),
-      catchError(this.handleError<any>('updateHero'))
-    );
-  }
-
   /** DELETE: delete the hero from the server */
   deleteHero (hero: Hero | number): Observable<Hero> {
     const id = typeof hero === 'number' ? hero : hero.id;
@@ -129,6 +130,7 @@ getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
 
   constructor(
     private http: HttpClient,
+    private apirequestService:ApiRequestService,
     private messageService: MessageService) { }
 
 }
