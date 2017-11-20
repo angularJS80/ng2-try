@@ -12,8 +12,8 @@ import {promise} from "selenium-webdriver";
 @Injectable()
 export class ApiRequestService {
 
-  private baseApiPath:string = "http://localhost:8080";
-
+  //private baseApiPath:string = "https://211.249.60.229:8443/hero";
+  private baseApiPath:string = "http://localhost/hero";
   constructor(
     private http: Http,
     //private userInfoService:UserInfoService,
