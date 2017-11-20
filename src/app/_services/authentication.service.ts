@@ -2,14 +2,17 @@
 import { Http, Headers, Response } from '@angular/http';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/map'
+import {ApiRequestService} from "./apiRequest.service";
 
 @Injectable()
 export class AuthenticationService {
     constructor(private http: Http,
-  private router: Router,) { }
+        private router: Router,
+        private apirequestService:ApiRequestService
+    ) { }
   //headers = new Headers({'Content-Type': 'application/json'});
     login(username: string, password: string) {
-        return this.http.post('http://localhost:8080/api/authenticate', { username: username, password: password })
+        return this.apirequestService.request('/api/authenticate', { username: username, password: password })
             .map((response: Response) => {
               alert(response);
                 // login successful if there's a jwt token in the response
