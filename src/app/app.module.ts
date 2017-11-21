@@ -21,6 +21,8 @@ import {AuthenticationService} from "./_services/authentication.service";
 import {HttpModule} from "@angular/http";
 import {UserService} from "./_services/user.service";
 import {ApiRequestService} from './_services/apiRequest.service'
+import {AlertComponent} from "./_directives/alert.component";
+import {HomeComponent} from "./home/home.component";
 
 
 
@@ -30,6 +32,8 @@ import {ApiRequestService} from './_services/apiRequest.service'
     HeroesComponent,
     HeroDetailComponent,
     MessagesComponent,
+    AlertComponent, // 미사용
+    HomeComponent, // 미사용
     DashboardComponent,
     HeroSearchComponent,
     LoginComponent,
