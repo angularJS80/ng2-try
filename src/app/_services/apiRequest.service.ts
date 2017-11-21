@@ -5,7 +5,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response, Request, RequestOptions, URLSearchParams,RequestMethod } from '@angular/http';
 import { Router } from '@angular/router';
-import { Observable, ReplaySubject, Subject } from 'rxjs';
+//import { Observable, ReplaySubject, Subject } from 'rxjs';
+import { Observable} from 'rxjs/observable';
 import {promise} from "selenium-webdriver";
 //import { UserInfoService } from './user-info.service';
 
