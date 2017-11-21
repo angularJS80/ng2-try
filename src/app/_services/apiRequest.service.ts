@@ -62,19 +62,19 @@ export class ApiRequestService {
       });
   }
 
-  post(url:string, body:Object):Observable<any>{
+  /*post(url:string, body:Object):Observable<any>{
     console.log(url);
     console.log(body);
     let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
     console.log(this.http.request(this.baseApiPath+url,requestOptions));
     return this.http.post(this.baseApiPath+url,requestOptions);
-   /*.catch(function(error:any){
+   /!*.catch(function(error:any){
         return Observable.throw(error || 'Server error')
-      });*/
+      });*!/
 
     //return this.http.request(this.baseApiPath+url,requestOptions);
-  }
+  }*/
 
   request(url:string, body:Object):Observable<any>{
     console.log(url);
