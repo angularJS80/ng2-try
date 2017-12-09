@@ -14,7 +14,9 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-@Injectable() // 인젝터블이 먼가요? 서비스를 여러 컴포넌트에서 사용하기위해 걸어주는 데코레이터 입니다.
+@Injectable() // 인젝터블이 먼가요? 서비스에서 사용하는 데코레이터로 컴포넌트단에서는 VIEW 와 관련된부분을 담당하고 서비스에서는 비지니스 로직을 구현하는 형태이다.
+              // 인텍터블을 통해 해당 서비스를 컴포넌트에서 호출만하여 사용가능하도록 한다.
+              // 사용하고자 하는 컴포넌트에서는 생성자에서 DI 형태로 주입받아 사용가능.
 export class HeroService {
   private heroesUrl = 'http://localhost:8080/hero/getList';  // URL to web api
 

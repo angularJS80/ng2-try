@@ -23,8 +23,11 @@ import {UserService} from "./_services/user.service";
 import {ApiRequestService} from './_services/apiRequest.service'
 import {AlertComponent} from "./_directives/alert.component";
 import {HomeComponent} from "./home/home.component";
-
-
+import {ItemComponent} from "./item/item.component";
+import {ItemService} from "./item/item.service";
+import { ListComponent } from './list/list.component';
+import { TodoComponent } from './todo/todo.component';
+import {TodoService} from "./todo/todo.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +40,10 @@ import {HomeComponent} from "./home/home.component";
     DashboardComponent,
     HeroSearchComponent,
     LoginComponent,
-    RegisterComponent
+    ItemComponent,
+    RegisterComponent,
+    TodoComponent,
+    ListComponent
 
   ],
   imports: [
@@ -47,6 +53,8 @@ import {HomeComponent} from "./home/home.component";
     HttpClientModule,
     HttpModule
   ],
+
+
   providers: [
     HeroService,
     MessageService,
@@ -54,7 +62,9 @@ import {HomeComponent} from "./home/home.component";
     AlertService,
     AuthenticationService,
     UserService,
-    ApiRequestService
+    ApiRequestService,
+    ItemService,
+    TodoService
   ],
   bootstrap: [AppComponent]
 })

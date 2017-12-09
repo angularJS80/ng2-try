@@ -1,27 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input, ViewChild, AfterViewInit} from '@angular/core';
 import {Hero} from './hero'
 import { HEROES } from '../mock-heroes';
 import { HeroService } from '../hero.service';
 import { Router } from '@angular/router';
+import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
+import {Observer, Observable} from "rxjs";
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css'],
 })
-export class HeroesComponent implements OnInit {
+export class HeroesComponent //implements AfterViewInit
+{
+  //@ViewChild(HeroDetailComponent) child;
+
   //heroes = HEROES;
   heroes: Hero[];
   selectedHero: Hero;
   addingHero = false;
+  getHerosOble:Observable;
+
   /*getHeroes(): void { // 영웅목록은 서비스로 부터 받아 온다.
     this.heroes = this.heroService.getHeroes();
   }*/
 
+  message:String;
+  /*ngAfterViewInit() {
+    console.log(this.child+"1234");
+    this.message = this.child.message;
+  }*/
+
   /*selectedHero: Hero;*/
   onSelect(hero: Hero): void {
+    hero.editable = false;
     this.selectedHero = hero;
   }
+
 
   addHero(): void {
     let newHero:Hero = new Hero();
@@ -74,7 +89,23 @@ export class HeroesComponent implements OnInit {
   ngOnInit() { // 컴포넌트가 올라오는 시점에 영웅목록을 가져온다.
     //this.heroes = HEROES;
 
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    this.getHerosOble = this.heroService.getHeroes();
+    this.getHerosOble.subscribe(this.herosObserver);
+    this.getHerosOble.subscribe(this.otherObserver);
+
   }
+
+  herosObserver:Observer= {
+    next: (heroes )=>(this.heroes = heroes)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
+  otherObserver:Observer= {
+    next: (heroes )=>(this.selectedHero = heroes[0])
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
+
 }

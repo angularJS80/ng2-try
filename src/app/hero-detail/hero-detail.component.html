@@ -8,8 +8,11 @@
   <div>
     <label>name: </label>
     <input [disabled]="!hero.editable" [(ngModel)]="hero.name" placeholder="name" />
-{{hero.editable}}
   </div>
   <button (click)="goBack()">Back</button>
   <button (click)="save()" *ngIf="hero.editable">Save</button>
+
+  <button (click)="feedbacktoParent(feedbackText)">FeedBacktoParent</button>
+  <input [(ngModel)]="feedbackText" placeholder="name" />
+
 </div>

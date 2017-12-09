@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     }
 
    /* deleteUser(id: number) {
-        this.userService.delete(id).subscribe(() => { this.loadAllUsers() });
+        this.userService.delete(id).subscribe(() => { this.loadAllUsers() }); // subcribe  map tap catch catcherror 등의 Observable 타입으로 받을때 사용가능한 메소드들의 사용법 알아보기
     }
 
     private loadAllUsers() {

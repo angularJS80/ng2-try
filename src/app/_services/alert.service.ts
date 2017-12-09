@@ -2,7 +2,7 @@
 import { Router, NavigationStart } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Subject } from 'rxjs/Subject';
-
+// 이서비스 당췌 왜 만들어 놨는지 ?
 @Injectable()
 export class AlertService {
     private subject = new Subject<any>();

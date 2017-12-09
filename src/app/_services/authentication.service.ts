@@ -14,7 +14,7 @@ export class AuthenticationService {
     login(username: string, password: string) {
         return this.apirequestService.request('/api/authenticate', { username: username, password: password })
             .map((response: Response) => {
-              alert(response);
+              console.log(response);
                 // login successful if there's a jwt token in the response
                 let user = response.json();
                 if (user && user.token) {

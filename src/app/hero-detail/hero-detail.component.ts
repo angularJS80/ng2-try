@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ActivatedRoute ,RouterStateSnapshot} from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -12,14 +12,25 @@ import { HeroService }  from '../hero.service';
   styleUrls: [ './hero-detail.component.css' ]
 })
 export class HeroDetailComponent implements OnInit {
-  @Input() hero: Hero;
 
+  @Input() hero: Hero;
+  //@Output() sendObject = new EventEmitter<Object>();
   constructor(
     private route: ActivatedRoute,
     private heroService: HeroService,
     private location: Location,
     //private  routerStateSnapshot:RouterStateSnapshot
   ) {}
+
+
+  message: String = "Hola Mundo!";
+  feedbackText:String ="send to parent ";
+
+  feedbacktoParent(){
+    this.message = this.feedbackText;
+    console.log(this.feedbackText);
+    //this.sendObject.emit(this.feedbackText);
+  }
 
   ngOnInit(): void {
     this.getHero();
