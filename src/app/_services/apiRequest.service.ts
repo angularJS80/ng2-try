@@ -62,7 +62,7 @@ export class ApiRequestService {
       });
   }
 
-  /*post(url:string, body:Object):Observable<any>{
+  /*post(url:string, body:Object):Observable<any>{ angular cli http 자원에 대한 post 와 request 함수 차이 가 무엇인지 http 라이브러리에서 제공되는 메스드별로 알아볼 필요가 있다.
     console.log(url);
     console.log(body);
     let me = this;
