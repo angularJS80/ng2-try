@@ -19,7 +19,7 @@ export class HeroesComponent //implements AfterViewInit
   heroes: Hero[];
   selectedHero: Hero;
   addingHero = false;
-  getHerosOble:Observable;
+  getHerosOble:Observable<any>;
 
   /*getHeroes(): void { // 영웅목록은 서비스로 부터 받아 온다.
     this.heroes = this.heroService.getHeroes();
@@ -90,22 +90,23 @@ export class HeroesComponent //implements AfterViewInit
     //this.heroes = HEROES;
 
     this.getHerosOble = this.heroService.getHeroes();
+
+
     this.getHerosOble.subscribe(this.herosObserver);
     this.getHerosOble.subscribe(this.otherObserver);
 
   }
 
-  herosObserver:Observer= {
+  herosObserver:Observer<any>= {
     next: (heroes )=>(this.heroes = heroes)
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
   }
 
-  otherObserver:Observer= {
+  otherObserver:Observer<any>= {
     next: (heroes )=>(this.selectedHero = heroes[0])
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
   }
-
 
 }

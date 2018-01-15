@@ -37,6 +37,9 @@ getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
     );
 }
 
+
+
+
   updateHero (hero: Hero): Observable<Hero> {
     /*return this.http.put(this.heroesUrl, hero, httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
