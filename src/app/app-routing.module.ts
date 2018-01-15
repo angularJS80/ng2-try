@@ -7,11 +7,13 @@ import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {ListComponent} from "./list/list.component";
 import {TodoComponent} from "./todo/todo.component";
+import {RunstateComponent} from "./runstate/runstate.component";
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', redirectTo: '/runstate', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'runstate', component: RunstateComponent },
   { path: 'detail/:heroStr', component: HeroDetailComponent },
   { path: 'addnew/:heroStr', component: HeroDetailComponent },
   { path: 'heroes', component: HeroesComponent },
@@ -19,9 +21,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'observerlist', component: ListComponent},
   { path: 'todolist', component: TodoComponent},
-
-
-
 ];
 
 @NgModule({

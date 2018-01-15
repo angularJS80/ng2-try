@@ -28,6 +28,20 @@ import {ItemService} from "./item/item.service";
 import { ListComponent } from './list/list.component';
 import { TodoComponent } from './todo/todo.component';
 import {TodoService} from "./todo/todo.service";
+import { RunstateComponent } from './runstate/runstate.component';
+import {GaugeModule} from "angular-gauge";
+import {AngularFireDatabaseModule} from "angularfire2/database-deprecated";
+import {AngularFireModule} from "angularfire2";
+
+const firebaseAuth = {
+  apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
+  authDomain: "ionic-chat-project-ace74.firebaseapp.com",
+  databaseURL: "https://ionic-chat-project-ace74.firebaseio.com",
+  projectId: "ionic-chat-project-ace74",
+  storageBucket: "ionic-chat-project-ace74.appspot.com",
+  messagingSenderId: "644376250918"
+};
+
 
 @NgModule({
   declarations: [
@@ -43,7 +57,8 @@ import {TodoService} from "./todo/todo.service";
     ItemComponent,
     RegisterComponent,
     TodoComponent,
-    ListComponent
+    RunstateComponent,
+    ListComponent,
 
   ],
   imports: [
@@ -51,7 +66,11 @@ import {TodoService} from "./todo/todo.service";
     FormsModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    GaugeModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseAuth),
+    AngularFireDatabaseModule
+
   ],
 
 
