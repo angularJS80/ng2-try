@@ -8,6 +8,7 @@ import {RegisterComponent} from "./register/register.component";
 import {ListComponent} from "./list/list.component";
 import {TodoComponent} from "./todo/todo.component";
 import {RunstateComponent} from "./runstate/runstate.component";
+import {ChatComponent} from "./chat/chat.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,9 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent},
   { path: 'observerlist', component: ListComponent},
   { path: 'todolist', component: TodoComponent},
+  { path: 'chats', component: ChatComponent},
+
+
 ];
 
 @NgModule({

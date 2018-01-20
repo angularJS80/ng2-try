@@ -33,6 +33,9 @@ import {GaugeModule} from "angular-gauge";
 import {AngularFireDatabaseModule} from "angularfire2/database-deprecated";
 import {AngularFireModule} from "angularfire2";
 
+import { ChatComponent } from './chat/chat.component';
+import {ChatService} from "./chat.service";
+
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
   authDomain: "ionic-chat-project-ace74.firebaseapp.com",
@@ -59,6 +62,7 @@ const firebaseAuth = {
     TodoComponent,
     RunstateComponent,
     ListComponent,
+    ChatComponent,
 
   ],
   imports: [
@@ -83,7 +87,8 @@ const firebaseAuth = {
     UserService,
     ApiRequestService,
     ItemService,
-    TodoService
+    TodoService,
+    ChatService,
   ],
   bootstrap: [AppComponent]
 })
