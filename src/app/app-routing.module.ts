@@ -9,6 +9,7 @@ import {ListComponent} from "./list/list.component";
 import {TodoComponent} from "./todo/todo.component";
 import {RunstateComponent} from "./runstate/runstate.component";
 import {ChatComponent} from "./chat/chat.component";
+import {AttachComponent} from "./attach/attach.component";
 
 
 const routes: Routes = [
@@ -23,6 +24,9 @@ const routes: Routes = [
   { path: 'observerlist', component: ListComponent},
   { path: 'todolist', component: TodoComponent},
   { path: 'chats', component: ChatComponent},
+  { path: 'attachfile', component: AttachComponent},
+
+
 
 
 ];
