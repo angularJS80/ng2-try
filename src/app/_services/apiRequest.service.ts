@@ -12,7 +12,8 @@ import { Observable} from 'rxjs/observable';
 @Injectable()
 export class ApiRequestService {
 
-  private baseApiPath:string = "http://211.249.60.229:58080/hero";
+  //private baseApiPath:string = "http://211.249.60.229:58080/hero";
+  private baseApiPath:string = "http://localhost:38080/api";
   constructor(
     private http: Http,
     //private userInfoService:UserInfoService,
@@ -52,13 +53,16 @@ export class ApiRequestService {
   get(url:string, urlParams?:URLSearchParams):Observable<any>{
     let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Get, url, urlParams);
+    console.log(requestOptions);
+
+
     return this.http.request(new Request(requestOptions))
-      .catch(function(error:any){
+      /*.catch(function(error:any){
         if (error.status === 401 || error.status === 403){
           me.router.navigate(['/logout']);
         }
         return Observable.throw(error || 'Server error')
-      });
+      });*/
   }
 
   /*post(url:string, body:Object):Observable<any>{ angular cli http 자원에 대한 post 와 request 함수 차이 가 무엇인지 http 라이브러리에서 제공되는 메스드별로 알아볼 필요가 있다.
@@ -105,11 +109,11 @@ export class ApiRequestService {
     let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Delete, url);
     return this.http.request(new Request(requestOptions))
-      .catch(function(error:any){
+      /*.catch(function(error:any){
         if (error.status === 401){
           me.router.navigate(['/logout']);
         }
         return Observable.throw(error || 'Server error')
-      });
+      });*/
   }
 }

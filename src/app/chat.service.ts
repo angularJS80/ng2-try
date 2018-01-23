@@ -4,7 +4,7 @@ import * as io from 'socket.io-client';
 
 @Injectable()
 export class ChatService {
-  private url = 'http://localhost:8080';
+  private url = 'http://localhost:38080';
   private socket;
 
   sendMsg(msg) {

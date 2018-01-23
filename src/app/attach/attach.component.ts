@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FileUploader, FileItem} from "ng2-file-upload";
 import {ApiRequestService} from "../_services/apiRequest.service";
+import {Observer, Observable} from "rxjs";
 
 @Component({
   selector: 'app-attach',
@@ -8,29 +9,44 @@ import {ApiRequestService} from "../_services/apiRequest.service";
   styleUrls: ['./attach.component.css']
 })
 export class AttachComponent implements OnInit {
-  apiurl:string = "http://localhost:38080/api/fileupload";
+  apiurl:string = "http://localhost:38080/api/fileUpload";
   uploader:FileUploader = new FileUploader({
     url:this.apiurl
   });
   completefilelist=[];
   cancelfilelist=[];
+  deletedatas ;
+
+  deleteObserver:Observer<any>= {
+    next: (datas)=>(this.deletedatas= datas)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
+
+
+
 
   constructor(public apirequestService:ApiRequestService) {
     this.uploader.onAfterAddingFile = (item => {
       item.withCredentials = false;
 
+
       // 서버에 전송해야 함으로 오버라이드 개념으로 재정의 하고 기존에 호출하던 cancelItem 호출
       item.remove = () => { // 제거 시 서버단 삭제 여부 결정필요
-        this.apirequestService.getRequestOptions("delete",this.apiurl+"/"+item.file["file_id"]);
-        this.uploader.removeFromQueue(item);
-        console.log(this.uploader.queue);
+
+        this.apirequestService.delete("/fileUpload/"+item.file["file_id"]).subscribe(
+          this.deleteObserver
+        );
+        //this.uploader.removeFromQueue(item);
+        //console.log(this.uploader.queue);
       };
 
       // 서버에 전송해야 함으로 오버라이드 개념으로 재정의 하고 기존에 호출하던 cancelItem 호출
       item.cancel = () => { // 업로드 도중 취소시 서버단 삭제 여부 결정필요
         this.apirequestService.getRequestOptions("delete",this.apiurl+"/"+item.file["file_id"]);
-        this.uploader.cancelItem(item);
-        console.log(this.uploader.queue);
+        //this.uploader.cancelItem(item);
+        //console.log(this.uploader.queue);
       };
     });
 

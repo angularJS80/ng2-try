@@ -37,6 +37,7 @@ import { ChatComponent } from './chat/chat.component';
 import {ChatService} from "./chat.service";
 import {FileUploadModule, FileSelectDirective} from "ng2-file-upload";
 import { AttachComponent } from './attach/attach.component';
+import { FilemngComponent } from './filemng/filemng.component';
 
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
@@ -67,6 +68,7 @@ const firebaseAuth = {
     ChatComponent,
     AttachComponent,
     FileSelectDirective,
+    FilemngComponent,
   ],
   imports: [
     BrowserModule,
