@@ -38,6 +38,7 @@ import {ChatService} from "./chat.service";
 import {FileUploadModule, FileSelectDirective} from "ng2-file-upload";
 import { AttachComponent } from './attach/attach.component';
 import { FilemngComponent } from './filemng/filemng.component';
+import {LimitToPipe} from "./pipe/limit-to.pipe";
 
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
@@ -47,7 +48,6 @@ const firebaseAuth = {
   storageBucket: "ionic-chat-project-ace74.appspot.com",
   messagingSenderId: "644376250918"
 };
-
 
 @NgModule({
   declarations: [
@@ -69,6 +69,8 @@ const firebaseAuth = {
     AttachComponent,
     FileSelectDirective,
     FilemngComponent,
+
+    LimitToPipe,
   ],
   imports: [
     BrowserModule,

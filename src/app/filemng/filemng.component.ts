@@ -12,12 +12,19 @@ export class FilemngComponent implements OnInit {
   constructor(public apirequestService:ApiRequestService) { }
 
   filelistObserver:Observer<any>= {
-    next: (datas )=>(this.filelist = datas)
+    next: (datas )=>{
+      this.filelist = JSON.parse(datas._body);
+      console.log(this.filelist);
+
+    } //(this.filelist = datas)
+
+
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
   }
 
   ngOnInit() {
+    console.log("test ngOninit");
     this.apirequestService.get("/fileList").subscribe(
       this.filelistObserver
     )

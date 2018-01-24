@@ -1,14 +1,17 @@
-<div id="youtube" *ngIf="loader===false">
+<!--<div id="youtube" *ngIf="loader===false">-->
+<div id="youtube" >
   <div class="row">
-    <div class="col-md-4 col-sm-12" *ngFor="let fileitem of fileList; let i = index">
+    <div class="col-md-4 col-sm-12" *ngFor="let fileitem of filelist; let i = index">
       <div class="card" >
         <div class="img-container">
-          <!--<img src="{{videos.thumbnail}}">-->
+          <a href="http://localhost:38080/api/videos/{{fileitem.filepath}}">
+          <img src="{{ 'http://localhost:38080/'+ fileitem.filepath + '_1.png'}}">
+          </a>
         </div>
         <div class="video-desc">
-          <!--<b>{{ fileitem.filename | limitTo: 28 }}</b><br>-->
-          <b>{{ fileitem.filename }}</b><br>
-          {{ fileitem.filepath }} likes<br>
+          <b>{{ fileitem.originalname | limitTo: 28 }}</b><br>
+          {{fileitem.size}} size<br>
+          {{fileitem.filepath}} encoding<br>
         </div>
       </div>
     </div>
