@@ -4,8 +4,8 @@
     <div class="col-md-4 col-sm-12" *ngFor="let fileitem of filelist; let i = index">
       <div class="card" >
         <div class="img-container">
-          <a href="http://localhost:38080/api/videos/{{fileitem.filepath}}">
-          <img src="{{ 'http://localhost:38080/'+ fileitem.filepath + '_1.png'}}">
+          <a href="{{ thumnailUrlRoot}}videos/{{fileitem.filepath}}">
+          <img src="{{ thumnailUrlRoot+ fileitem.filepath + '_1.png'}}">
           </a>
         </div>
         <div class="video-desc">
@@ -17,4 +17,5 @@
     </div>
   </div>
 </div>
-<div class="loader" *ngIf="loader===true"></div>
+<!--<div class="loader" *ngIf="loader===true"></div>-->
+<app-smart-playlist ></app-smart-playlist>

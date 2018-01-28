@@ -11,6 +11,7 @@ import {RunstateComponent} from "./runstate/runstate.component";
 import {ChatComponent} from "./chat/chat.component";
 import {AttachComponent} from "./attach/attach.component";
 import {FilemngComponent} from "./filemng/filemng.component";
+import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component";
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'chats', component: ChatComponent},
   { path: 'attachfile', component: AttachComponent},
   { path: 'filelist', component: FilemngComponent},
+  { path: 'smartplay', component: SmartPlaylistComponent},
 
 
 

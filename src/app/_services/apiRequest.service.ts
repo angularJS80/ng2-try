@@ -6,19 +6,22 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, Response, Request, RequestOptions, URLSearchParams,RequestMethod } from '@angular/http';
 import { Router } from '@angular/router';
 //import { Observable, ReplaySubject, Subject } from 'rxjs';
-import { Observable} from 'rxjs/observable';
+import { Observable} from 'rxjs/Observable';
+import {GlobalConst} from "../globalconst";
 //import { UserInfoService } from './user-info.service';
 
 @Injectable()
 export class ApiRequestService {
 
-  //private baseApiPath:string = "http://211.249.60.229:58080/hero";
-  private baseApiPath:string = "http://localhost:38080/api";
+  private baseApiPath:string = "http://211.249.60.229:58080/hero";
+  public set setbaseApiPath(apiPath:string) {
+    this.baseApiPath = apiPath;
+  }
+
   constructor(
     private http: Http,
     //private userInfoService:UserInfoService,
-    private router:Router
-
+    private router:Router,
   ) { }
 
   appendAuthHeader():Headers {

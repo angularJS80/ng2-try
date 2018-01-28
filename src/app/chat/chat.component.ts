@@ -9,7 +9,7 @@ import {ChatService} from "../chat.service";
 export class ChatComponent implements OnInit {
 
   username:string='';
-  msg={date :new Date()};
+  msg={message:"",date :new Date()};
   connection ;
   msgs:any[] ;
   constructor(

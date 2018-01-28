@@ -35,10 +35,19 @@ import {AngularFireModule} from "angularfire2";
 
 import { ChatComponent } from './chat/chat.component';
 import {ChatService} from "./chat.service";
-import {FileUploadModule, FileSelectDirective} from "ng2-file-upload";
+import {FileUploadModule} from "ng2-file-upload";
 import { AttachComponent } from './attach/attach.component';
 import { FilemngComponent } from './filemng/filemng.component';
 import {LimitToPipe} from "./pipe/limit-to.pipe";
+
+/*angular movie*/
+import { VgCoreModule } from 'videogular2/core';
+import { VgControlsModule } from 'videogular2/controls';
+import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component";
+import {VgBufferingModule} from "videogular2/src/buffering/buffering";
+
+
+
 
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
@@ -67,9 +76,8 @@ const firebaseAuth = {
     ListComponent,
     ChatComponent,
     AttachComponent,
-    FileSelectDirective,
     FilemngComponent,
-
+    SmartPlaylistComponent,
     LimitToPipe,
   ],
   imports: [
@@ -80,8 +88,13 @@ const firebaseAuth = {
     HttpModule,
     GaugeModule.forRoot(),
     AngularFireModule.initializeApp(firebaseAuth),
-    AngularFireDatabaseModule
-
+    AngularFireDatabaseModule,
+    VgCoreModule,
+    VgControlsModule,
+    FileUploadModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgBufferingModule,
   ],
 
 
