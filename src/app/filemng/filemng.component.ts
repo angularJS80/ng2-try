@@ -32,7 +32,7 @@ export class FilemngComponent implements OnInit {
 
   ngOnInit() {
     console.log("test ngOninit");
-    this.apirequestService.get("fileList").subscribe(
+    this.apirequestService.get("/fileList").subscribe(
       this.filelistObserver
     )
   }

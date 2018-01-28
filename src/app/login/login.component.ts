@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     login() {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
-          .subscribe(
+         .subscribe(
                 data => {
                     this.router.navigate([this.returnUrl]);
                 },
@@ -39,5 +39,7 @@ export class LoginComponent implements OnInit {
                     this.messageService.add(error);
                     this.loading = false;
                 });
+
+
     }
 }

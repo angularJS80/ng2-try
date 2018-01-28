@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import * as io from 'socket.io-client';
+import {GlobalConst} from "./globalconst";
 
 @Injectable()
 export class ChatService {
-  private url = 'http://localhost:38080';
+  private url = GlobalConst.NODE_ENDPOINT;
   private socket;
 
   sendMsg(msg) {

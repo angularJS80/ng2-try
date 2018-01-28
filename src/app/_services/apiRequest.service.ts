@@ -13,7 +13,7 @@ import {GlobalConst} from "../globalconst";
 @Injectable()
 export class ApiRequestService {
 
-  private baseApiPath:string = "http://211.249.60.229:58080/hero";
+  private baseApiPath:string = "";
   public set setbaseApiPath(apiPath:string) {
     this.baseApiPath = apiPath;
   }

@@ -9,6 +9,7 @@ import {Response} from '@angular/http';
 import {MessageService} from './message.service'
 import { catchError, map, tap } from 'rxjs/operators';
 import {ApiRequestService} from './_services/apiRequest.service'
+import {GlobalConst} from "./globalconst";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -136,6 +137,8 @@ getHeroes(): Observable<Hero[]> { // Observable은 먼가요?
   constructor(
     private http: HttpClient,
     private apirequestService:ApiRequestService,
-    private messageService: MessageService) { }
+    private messageService: MessageService) {
+    this.apirequestService.setbaseApiPath = GlobalConst.HEROAPI_ENDPOINT;
+  }
 
 }
