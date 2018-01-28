@@ -9,10 +9,8 @@ import {GlobalConst} from "../globalconst";
   styleUrls: ['./filemng.component.css']
 })
 export class FilemngComponent implements OnInit {
-  filelist = [];
+  filelist:Array<any> = [];
   thumnailUrlRoot:string;
-
-
 
   constructor(public apirequestService:ApiRequestService) {
     apirequestService.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
@@ -23,11 +21,35 @@ export class FilemngComponent implements OnInit {
     next: (datas )=>{
       this.filelist = JSON.parse(datas._body);
       console.log(this.filelist);
-
     } //(this.filelist = datas)
-
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
+  }
+
+  fileremoveObserver:Observer<any>=     {
+    next: (datas )=>{
+      let file_id = JSON.parse(datas._body);
+      this.removeItem(file_id)
+    } //(this.filelist = datas)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
+  removeItem(file_id){
+    const index: number = this.filelist.findIndex(function(item){
+      return item._id ===file_id
+    })
+
+    if (index !== -1) {
+      this.filelist.splice(index, 1);
+      console.log("file remove compleit");
+    }
+  }
+
+  removefile(fileitem){
+    this.apirequestService.delete("/fileUpload/"+fileitem._id).subscribe(
+      this.fileremoveObserver
+    )
   }
 
   ngOnInit() {
