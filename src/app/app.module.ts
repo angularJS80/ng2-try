@@ -48,7 +48,6 @@ import {VgBufferingModule} from "videogular2/src/buffering/buffering";
 
 
 
-
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
   authDomain: "ionic-chat-project-ace74.firebaseapp.com",
