@@ -45,6 +45,7 @@ import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
 import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component";
 import {VgBufferingModule} from "videogular2/src/buffering/buffering";
+import { UtbattachComponent } from './utbattach/utbattach.component';
 
 
 
@@ -77,7 +78,8 @@ const firebaseAuth = {
     AttachComponent,
     FilemngComponent,
     SmartPlaylistComponent,
-    LimitToPipe,
+    UtbattachComponent,
+     LimitToPipe,
   ],
   imports: [
     BrowserModule,

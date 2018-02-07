@@ -12,6 +12,7 @@ import {ChatComponent} from "./chat/chat.component";
 import {AttachComponent} from "./attach/attach.component";
 import {FilemngComponent} from "./filemng/filemng.component";
 import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component";
+import {UtbattachComponent} from "./utbattach/utbattach.component";
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'todolist', component: TodoComponent},
   { path: 'chats', component: ChatComponent},
   { path: 'attachfile', component: AttachComponent},
+  { path: 'attachUtbUrl', component: UtbattachComponent},
   { path: 'filelist', component: FilemngComponent},
   { path: 'smartplay', component: SmartPlaylistComponent},
 

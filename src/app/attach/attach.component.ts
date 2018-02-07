@@ -9,15 +9,16 @@ import {GlobalConst} from "../globalconst";
   templateUrl: './attach.component.html',
   styleUrls: ['./attach.component.css']
 })
+
 export class AttachComponent implements OnInit {
   //uploadUrl:string = "http://localhost:38080/api/fileUpload";
   uploadUrl:string = "";
-  uploader:FileUploader;
 
+
+  deletedatas ;
+  uploader:FileUploader;
   completefilelist=[];
   cancelfilelist=[];
-  deletedatas ;
-
   deleteObserver:Observer<any>= {
     next: (datas)=>(this.deletedatas= datas)
     ,error:(error)=>(console.log(error))
