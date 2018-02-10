@@ -85,6 +85,7 @@ export class ApiRequestService {
   request(url:string, body:Object):Observable<any>{
     console.log(url);
     console.log(body);
+    console.log(this.baseApiPath)
     let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
     console.log(this.http.request(this.baseApiPath+url,requestOptions));
