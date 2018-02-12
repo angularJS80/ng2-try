@@ -38,7 +38,7 @@ export class AttachComponent implements OnInit {
 
       // 서버에 전송해야 함으로 오버라이드 개념으로 재정의 하고 기존에 호출하던 cancelItem 호출
       item.remove = () => { // 제거 시 서버단 삭제 여부 결정필요
-
+        
         this.apirequestService.delete("/fileUpload/"+item.file["file_id"]).subscribe(
           this.deleteObserver
         );

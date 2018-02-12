@@ -96,6 +96,7 @@ const firebaseAuth = {
     VgCoreModule,
     VgControlsModule,
     VgBufferingModule,
+   // MaterialModule.forRoot()
   ],
 
 

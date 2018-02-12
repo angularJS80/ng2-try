@@ -36,4 +36,6 @@ export class AlertService {
     getMessage(): Observable<any> {
         return this.subject.asObservable();
     }
+
+    //삭제경고처리에 대한 로직 추가 예정 
 }

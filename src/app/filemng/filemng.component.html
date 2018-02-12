@@ -12,7 +12,14 @@
           <b>{{ fileitem.originalname | limitTo: 28 }}</b><br>
           {{fileitem.size}} size<br>
           {{fileitem.filepath}} encoding<br>
+          <span >
+            <a  download="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
+              <i class="glyphicon glyphicon-download-alt" ></i>
+            </a>
+          </span>
           <span ><i class="glyphicon glyphicon-remove" (click)="removefile(fileitem)"></i></span>
+
+
         </div>
       </div>
     </div>
