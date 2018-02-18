@@ -2,6 +2,7 @@
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
 import { User } from '../_models/index';
+import {GlobalConst} from "../globalconst";
 
 @Injectable()
 export class UserService {
@@ -16,7 +17,7 @@ export class UserService {
     }
 
     create(user: User) {
-        return this.http.post('http://localhost:8080/api/register', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(GlobalConst.NODE_ENDPOINT+'/openapi/register', user, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: User) {

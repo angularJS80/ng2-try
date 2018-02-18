@@ -52,6 +52,14 @@ export class FilemngComponent implements OnInit {
     )
   }
 
+
+  encodefile(fileitem){
+
+    this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
+      //this.fileremoveObserver
+    )
+  }
+
   ngOnInit() {
     console.log("test ngOninit");
     this.apirequestService.get("/fileList").subscribe(

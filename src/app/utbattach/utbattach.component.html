@@ -62,15 +62,15 @@
         </button>
         <button type="button" class="btn btn-success btn-xs"
                 (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-          <span class="glyphicon glyphicon-upload"></span> Upload all
+          <span class="glyphicon glyphicon-upload"></span> Upload
         </button>
         <button type="button" class="btn btn-warning btn-xs"
                 (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-          <span class="glyphicon glyphicon-ban-circle"></span> Cancel all
+          <span class="glyphicon glyphicon-ban-circle"></span> Cancel
         </button>
         <button type="button" class="btn btn-danger btn-xs"
                 (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-          <span class="glyphicon glyphicon-trash"></span> Remove all
+          <span class="glyphicon glyphicon-trash"></span> Remove
         </button>
       </div>
     </div>

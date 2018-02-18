@@ -25,6 +25,7 @@ export class ApiRequestService {
   ) { }
 
   appendAuthHeader():Headers {
+    console.log("setting auth header")
     let headers = new Headers({'Content-Type': 'application/json'});
   //  let token = this.userInfoService.getStoredToken();
     let token:string =null;

@@ -10,15 +10,15 @@
         </div>
         <div class="video-desc">
           <b>{{ fileitem.originalname | limitTo: 28 }}</b><br>
-          {{fileitem.size}} size<br>
-          {{fileitem.filepath}} encoding<br>
+          size : {{fileitem.size}} <br>
+          date : <br>
           <span >
-            <a  download="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
+            <a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
               <i class="glyphicon glyphicon-download-alt" ></i>
             </a>
           </span>
           <span ><i class="glyphicon glyphicon-remove" (click)="removefile(fileitem)"></i></span>
-
+          <span ><i class="glyphicon glyphicon-screenshot" (click)="encodefile(fileitem)"></i></span>
 
         </div>
       </div>
