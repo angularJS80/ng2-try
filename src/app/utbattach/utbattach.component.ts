@@ -30,7 +30,17 @@ class UrlItem{
   apirequestService:ApiRequestService;
 
   urluploadObserver:Observer<any>= {
-    next: (datas)=>(console.log(datas))
+    next: (datas)=>{
+      console.log(datas._body);
+
+
+      var file_id = JSON.parse(datas._body)._id;
+
+      this.getMsgs(file_id).subscribe(percentage => {
+        console.log(percentage );
+        this.progress =percentage.toString();
+      });
+    }
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
   }
@@ -45,7 +55,6 @@ class UrlItem{
       this.getMsgs(file_id).subscribe(percentage => {
         console.log(percentage );
         this.progress =percentage.toString();
-
       });
 
       this.apirequestService.request('/utbupload',{utburl:this.utburl,file_id:file_id}).subscribe(this.urluploadObserver);
@@ -60,9 +69,11 @@ class UrlItem{
   }*/
 
   upload(){
-    this.apirequestService.get('/createFileId').subscribe(
+    this.apirequestService.request('/utbupload',{utburl:this.utburl}).subscribe(this.urluploadObserver);
+
+    /*this.apirequestService.get('/createFileId').subscribe(
       this.createFileIdObserver
-    );
+    );*/
 
 
    }

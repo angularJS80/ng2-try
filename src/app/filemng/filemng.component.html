@@ -9,11 +9,15 @@
           </a>
         </div>
         <div class="video-desc">
+
           <b>{{ fileitem.originalname | limitTo: 28 }}</b><br>
+          <span><div class="progress" style="margin-bottom: 0;">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': fileitem.progress + '%' }"></div>
+          </div></span>
           size : {{fileitem.size}} <br>
           date : <br>
           <span >
-            <a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
+            <a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{fileitem.originalname}}.mp4">
               <i class="glyphicon glyphicon-download-alt" ></i>
             </a>
           </span>

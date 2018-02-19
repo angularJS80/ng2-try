@@ -14,7 +14,7 @@ export class FilemngComponent implements OnInit {
   filelist:Array<any> = [];
   thumnailUrlRoot:string;
 
-  constructor(public apirequestService:ApiRequestService) {
+  constructor(public apirequestService:ApiRequestService ) {
     apirequestService.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
     this.thumnailUrlRoot = GlobalConst.NODEAPI_ENDPOINT;
   }
@@ -41,7 +41,7 @@ export class FilemngComponent implements OnInit {
         console.log(item)
         this.getMsgs(item._id).subscribe(percentage => {
           console.log(percentage );
-          //this.progress =percentage.toString();
+          item.progress =percentage.toString();
 
         });
       })
@@ -56,6 +56,22 @@ export class FilemngComponent implements OnInit {
     next: (datas )=>{
       let file_id = JSON.parse(datas._body);
       this.removeItem(file_id)
+    } //(this.filelist = datas)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
+  fileaddObserver:Observer<any>=     {
+    next: (datas )=>{
+      var item = JSON.parse(datas._body)
+      console.log(item)
+      this.filelist.push(item);
+      item.progress = "0";
+      this.getMsgs(item._id).subscribe(percentage => {
+        console.log(percentage );
+        item.progress =percentage.toString();
+      });
+
     } //(this.filelist = datas)
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
@@ -78,13 +94,9 @@ export class FilemngComponent implements OnInit {
     )
   }
 
-
-
-
   encodefile(fileitem){
-
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
-      //this.fileremoveObserver
+      this.fileaddObserver
     )
   }
 
