@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+
+
+import {  JasperoConfirmationsModule} from '@jaspero/ng2-confirmations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule }    from '@angular/common/http';
 
@@ -96,6 +101,8 @@ const firebaseAuth = {
     VgCoreModule,
     VgControlsModule,
     VgBufferingModule,
+    JasperoConfirmationsModule,
+    BrowserAnimationsModule,
    // MaterialModule.forRoot()
   ],
 

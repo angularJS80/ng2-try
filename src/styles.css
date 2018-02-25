@@ -21,3 +21,23 @@ body, input[text], button {
 * {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+
+.jaspero__dialog-actions {
+  min-height: 52px;
+  padding: 8px 8px 8px 24px;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: center !important;
+  position: relative;
+}
+
+
+.jaspero__dialog-actions button.primary {
+  background-color: orange !important;
+  color: rgba(255, 255, 255, .87);
+}

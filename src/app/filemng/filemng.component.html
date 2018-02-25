@@ -1,31 +1,61 @@
+
+
 <!--<div id="youtube" *ngIf="loader===false">-->
+
+
 <div id="youtube" >
   <div class="row">
-    <div class="col-md-4 col-sm-12" *ngFor="let fileitem of filelist; let i = index">
-      <div class="card" >
-        <div class="img-container">
-          <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
-          <img src="{{ thumnailUrlRoot+'/'+ fileitem.filepath + '.png'}}">
-          </a>
-        </div>
-        <div class="video-desc">
+    <div class="col-lg-4 or-col-lg-4 col-md-6 mb-4 " *ngFor="let fileitem of filelist; let i = index">
+      <div class="card  card-cascade wider" >
 
-          <b>{{ fileitem.originalname | limitTo: 28 }}</b><br>
-          <span><div class="progress" style="margin-bottom: 0;">
+        <div class="card-body">
+
+
+
+          <div class="listprogress" style="margin-bottom: 0;">
             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': fileitem.progress + '%' }"></div>
-          </div></span>
-          size : {{fileitem.size}} <br>
-          date : <br>
-          <span >
-            <a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{fileitem.originalname}}.mp4">
-              <i class="glyphicon glyphicon-download-alt" ></i>
-            </a>
-          </span>
-          <span ><i class="glyphicon glyphicon-remove" (click)="removefile(fileitem)"></i></span>
-          <span ><i class="glyphicon glyphicon-screenshot" (click)="encodefile(fileitem)"></i></span>
+          </div>
+          <div class="content-flex" >
+            <div class="img-container">
+              <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
+                <img src="{{ thumnailUrlRoot+'/'+ fileitem.filepath + '.png'}}">
+              </a>
+            </div>
+            <div class="video-desc">
+
+              <p class="card-text mr-2 ml-2">
+                <span class="video-title">
+               {{ fileitem.originalname }}</span><br>
+                <!--<span><b>{{ fileitem.originalname | limitTo: 22 }}</b><br></span>-->
+               <span class="video-size">size : {{fileitem.size}}</span><br>
+                <span class="video-date">date :</span>
+            </div>
+
+            <div class="video-control">
+
+              <p><a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{fileitem.originalname}}.mp4">
+                <i class="glyphicon glyphicon-download-alt" ></i>
+
+              </a>
+              </p>
+
+              <p>
+                <i class="glyphicon glyphicon-remove " (click)="removefile(fileitem)"></i>
+              </p>
+              <p>
+                <i class="glyphicon glyphicon-retweet" (click)="encodefile(fileitem)"></i>
+              </p>
+
+            </div>
+
+          </div>
+
+
+
 
         </div>
       </div>
+
     </div>
   </div>
 </div>

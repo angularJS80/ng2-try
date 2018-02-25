@@ -5,6 +5,8 @@ import {GlobalConst} from "../globalconst";
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 
+import {  ConfirmationService} from '@jaspero/ng2-confirmations';
+
 @Component({
   selector: 'app-filemng',
   templateUrl: './filemng.component.html',
@@ -13,21 +15,25 @@ import { Observable } from 'rxjs/Observable';
 export class FilemngComponent implements OnInit {
   filelist:Array<any> = [];
   thumnailUrlRoot:string;
-
-  constructor(public apirequestService:ApiRequestService ) {
+  socket ;
+  connections:Array<any> =[];
+  constructor(public apirequestService:ApiRequestService ,private _confirmation: ConfirmationService) {
     apirequestService.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
     this.thumnailUrlRoot = GlobalConst.NODEAPI_ENDPOINT;
+    this.socket = io(GlobalConst.NODE_ENDPOINT);
   }
 
   getMsgs(file_id) {
+    console.log("socket listening"+file_id)
     let obsable = new Observable(observer => {
-      var socket = io(GlobalConst.NODE_ENDPOINT);
-      socket.on('new-prog-msg'+file_id, (data) => {
+
+      this.socket.on('new-prog-msg'+file_id, (data) => {
         observer.next(data);
       });
 
       return () => {
-        socket.disconnect();
+        console.log("socket disconnect")
+        this.socket.disconnect();
       }
     })
     return obsable;
@@ -37,13 +43,23 @@ export class FilemngComponent implements OnInit {
     next: (datas )=>{
       this.filelist = JSON.parse(datas._body);
       console.log(this.filelist);
+      var cnt = 0;
       this.filelist.forEach(item=>{
-        console.log(item)
-        this.getMsgs(item._id).subscribe(percentage => {
-          console.log(percentage );
-          item.progress =percentage.toString();
 
-        });
+        if(item.encodests =='P'){
+          cnt = cnt + 1;
+          console.log(cnt)
+          console.log(item)
+          //if(cnt<2){
+          this.connections[cnt] = this.getMsgs(item._id).subscribe(percentage => {
+              console.log(percentage );
+              item.progress =percentage.toString();
+
+            });
+         // }
+          /**/
+        }
+
       })
 
 
@@ -89,15 +105,32 @@ export class FilemngComponent implements OnInit {
   }
 
   removefile(fileitem){
-    this.apirequestService.delete("/fileUpload/"+fileitem._id).subscribe(
-      this.fileremoveObserver
-    )
+    var conset:ConfirmSettings = {
+      overlay: false,
+      overlayClickToClose: true,
+      showCloseButton: false
+      }
+
+
+
+    this._confirmation.create('Delete?', 'You should really just do it.',conset)
+      // The confirmation returns an Observable Subject which will notify you about the outcome
+      .subscribe((ans: ResolveEmit) =>{
+        if(ans.resolved){
+          this.apirequestService.delete("/fileUpload/"+fileitem._id).subscribe(
+            this.fileremoveObserver
+          )
+        }
+      })
   }
 
+
   encodefile(fileitem){
+
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
       this.fileaddObserver
     )
+
   }
 
   ngOnInit() {
@@ -106,5 +139,25 @@ export class FilemngComponent implements OnInit {
       this.filelistObserver
     )
   }
+  ngOnDestroy() {
+    this.connections.forEach(connection=>{
+      connection.unsubscribe();
+      }
+    )
+  }
 
+}
+export interface ResolveEmit {
+  // Returns this if modal resolved with yes or no
+  resolved?: boolean;
+  // If the modal was closed in some other way this is removed
+  closedWithOutResolving?: string;
+}
+
+export interface ConfirmSettings {
+  overlay?: boolean; // Default: true
+  overlayClickToClose?: boolean; // Default: true
+  showCloseButton?: boolean; // Default: true
+  confirmText?: string; // Default: 'Yes'
+  declineText?: string; // Default: 'No'
 }
