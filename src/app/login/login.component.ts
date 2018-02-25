@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AlertService, AuthenticationService } from '../_services/index';
 import {MessageService} from "../message.service";
+import {ApiRequestService} from "../_services/apiRequest.service";
+import {GlobalConst} from "../globalconst";
 
 @Component({
     moduleId: module.id,
@@ -17,8 +19,12 @@ export class LoginComponent implements OnInit {
     constructor(
         private route: ActivatedRoute,
         private router: Router,
+        public apirequestService:ApiRequestService,
         private authenticationService: AuthenticationService,
-        private messageService: MessageService) { }
+        private messageService: MessageService) {
+         apirequestService.setbaseApiPath = GlobalConst.NODE_ENDPOINT;
+
+    }
 
     ngOnInit() {
         // reset login status

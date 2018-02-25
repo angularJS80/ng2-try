@@ -61,6 +61,13 @@ export class ApiRequestService {
 
 
     return this.http.request(new Request(requestOptions))
+      /*
+      .map(res => res.json())
+      .subscribe(
+        data => console.log(data),
+        err => console.log(err),
+        () => console.log('yay')
+      );*/
       /*.catch(function(error:any){
         if (error.status === 401 || error.status === 403){
           me.router.navigate(['/logout']);
