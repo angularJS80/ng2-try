@@ -15,7 +15,7 @@ export class
 
 
 AppComponent {
-  title = 'corpApp';
+  title = 'UTB Link Saver';
 
   constructor (private authenticationService:AuthenticationService
   ){

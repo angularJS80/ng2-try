@@ -7,13 +7,32 @@ import { Http, Headers, Response, Request, RequestOptions, URLSearchParams,Reque
 import { Router } from '@angular/router';
 //import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { Observable} from 'rxjs/Observable';
-import {GlobalConst} from "../globalconst";
-//import { UserInfoService } from './user-info.service';
+import {Observer} from "rxjs";
 
 @Injectable()
 export class ApiRequestService {
 
   private baseApiPath:string = "";
+
+  requestObserver:Observer<any>=     {
+    next: (datas )=>{
+      console.log("api request : datas"+datas)
+    }
+    ,error:(error)=>{
+      console.log("api request error : "+error)
+      if (error.status === 401){
+        this.router.navigate(['/logout']);
+      }
+
+      if (error.status === 403){
+        this.router.navigate(['/login']);
+      }
+
+
+    }
+    ,complete:()=>(console.log("api request complete"))
+  }
+
   public set setbaseApiPath(apiPath:string) {
     this.baseApiPath = apiPath;
   }
@@ -55,77 +74,44 @@ export class ApiRequestService {
   }
 
   get(url:string, urlParams?:URLSearchParams):Observable<any>{
-    let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Get, url, urlParams);
     console.log(requestOptions);
 
+    let rtnObsable = this.http.request(new Request(requestOptions));
+    rtnObsable.subscribe(
+      this.requestObserver
+    );
+    return rtnObsable;
 
-    return this.http.request(new Request(requestOptions))
-      /*
-      .map(res => res.json())
-      .subscribe(
-        data => console.log(data),
-        err => console.log(err),
-        () => console.log('yay')
-      );*/
-      /*.catch(function(error:any){
-        if (error.status === 401 || error.status === 403){
-          me.router.navigate(['/logout']);
-        }
-        return Observable.throw(error || 'Server error')
-      });*/
   }
 
-  /*post(url:string, body:Object):Observable<any>{ angular cli http 자원에 대한 post 와 request 함수 차이 가 무엇인지 http 라이브러리에서 제공되는 메스드별로 알아볼 필요가 있다.
-    console.log(url);
-    console.log(body);
-    let me = this;
-    let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
-    console.log(this.http.request(this.baseApiPath+url,requestOptions));
-    return this.http.post(this.baseApiPath+url,requestOptions);
-   /!*.catch(function(error:any){
-        return Observable.throw(error || 'Server error')
-      });*!/
-
-    //return this.http.request(this.baseApiPath+url,requestOptions);
-  }*/
-
   request(url:string, body:Object):Observable<any>{
-    console.log(url);
-    console.log(body);
-    console.log(this.baseApiPath)
-    let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
     console.log(this.http.request(this.baseApiPath+url,requestOptions));
-    return this.http.request(new Request(requestOptions));
-    /*.catch(function(error:any){
-     return Observable.throw(error || 'Server error')
-     });*/
 
-    //return this.http.request(this.baseApiPath+url,requestOptions);
+    let rtnObsable = this.http.request(new Request(requestOptions));
+    rtnObsable.subscribe(
+      this.requestObserver
+    );
+    return rtnObsable
   }
 
   put(url:string, body:Object):Observable<any>{
-    let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Put, url, undefined, body);
-    return this.http.request(new Request(requestOptions))
-      .catch(function(error:any){
-        if (error.status === 401){
-          me.router.navigate(['/logout']);
-        }
-        return Observable.throw(error || 'Server error')
-      });
-  }
+    let rtnObsable = this.http.request(new Request(requestOptions))
+    rtnObsable.subscribe(
+      this.requestObserver
+    );
+    return rtnObsable;
+   }
 
   delete(url:string):Observable<any>{
-    let me = this;
     let requestOptions = this.getRequestOptions(RequestMethod.Delete, url);
-    return this.http.request(new Request(requestOptions))
-      /*.catch(function(error:any){
-        if (error.status === 401){
-          me.router.navigate(['/logout']);
-        }
-        return Observable.throw(error || 'Server error')
-      });*/
+    let rtnObsable = this.http.request(new Request(requestOptions))
+    rtnObsable.subscribe(
+      this.requestObserver
+    );
+    return rtnObsable;
+
   }
 }

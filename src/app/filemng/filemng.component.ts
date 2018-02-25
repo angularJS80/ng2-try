@@ -51,11 +51,13 @@ export class FilemngComponent implements OnInit {
           console.log(cnt)
           console.log(item)
           //if(cnt<2){
-          this.connections[cnt] = this.getMsgs(item._id).subscribe(percentage => {
+          var connection = this.getMsgs(item._id).subscribe(percentage => {
               console.log(percentage );
               item.progress =percentage.toString();
 
             });
+          this.connections.push(connection);
+
          // }
           /**/
         }
@@ -83,11 +85,11 @@ export class FilemngComponent implements OnInit {
       console.log(item)
       this.filelist.push(item);
       item.progress = "0";
-      this.getMsgs(item._id).subscribe(percentage => {
+      var connection =  this.getMsgs(item._id).subscribe(percentage => {
         console.log(percentage );
         item.progress =percentage.toString();
       });
-
+      this.connections.push(connection);
     } //(this.filelist = datas)
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
@@ -147,6 +149,7 @@ export class FilemngComponent implements OnInit {
   }
 
 }
+
 export interface ResolveEmit {
   // Returns this if modal resolved with yes or no
   resolved?: boolean;
