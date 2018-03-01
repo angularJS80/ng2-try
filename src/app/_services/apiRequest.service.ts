@@ -87,12 +87,13 @@ export class ApiRequestService {
 
   request(url:string, body:Object):Observable<any>{
     let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
-    console.log(this.http.request(this.baseApiPath+url,requestOptions));
+    //console.log(this.http.request(this.baseApiPath+url,requestOptions));
 
-    let rtnObsable = this.http.request(new Request(requestOptions));
-    rtnObsable.subscribe(
-      this.requestObserver
-    );
+    let rtnObsable = this.http.request(new Request(requestOptions))
+      .map(data=> {
+        this.requestObserver.next(data);
+        return data;
+      });
     return rtnObsable
   }
 
