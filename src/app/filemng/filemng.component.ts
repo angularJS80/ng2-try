@@ -4,7 +4,7 @@ import {Observer} from "rxjs";
 import {GlobalConst} from "../globalconst";
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
-
+import * as FileSaver from 'file-saver';
 import {  ConfirmationService} from '@jaspero/ng2-confirmations';
 
 @Component({
@@ -80,20 +80,25 @@ export class FilemngComponent implements OnInit {
   }
 
   fileaddObserver:Observer<any>=     {
-    next: (datas )=>{
-      var item = JSON.parse(datas._body)
-      console.log(item)
-      this.filelist.push(item);
-      item.progress = "0";
-      var connection =  this.getMsgs(item._id).subscribe(percentage => {
-        console.log(percentage );
-        item.progress =percentage.toString();
-      });
-      this.connections.push(connection);
+    next: (blob )=>{
+
     } //(this.filelist = datas)
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
   }
+
+
+  filedownloadObserver:Observer<any>=     {
+    next: (datas )=>{
+
+      console.log(datas);
+
+      FileSaver.saveAs(datas._body,"filename.mp4")
+    } //(this.filelist = datas)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
+
 
   removeItem(file_id){
     const index: number = this.filelist.findIndex(function(item){
@@ -126,9 +131,16 @@ export class FilemngComponent implements OnInit {
       })
   }
 
+  downlloadfile(fileitem){
+
+console.log(this.thumnailUrlRoot+"/videos/"+fileitem.filepath);
+    this.apirequestService.getBinary("/videos/"+fileitem.filepath).subscribe(
+     this.filedownloadObserver
+    )
+  }
+
 
   encodefile(fileitem){
-
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
       this.fileaddObserver
     )

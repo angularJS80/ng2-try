@@ -77,12 +77,26 @@ export class ApiRequestService {
     let requestOptions = this.getRequestOptions(RequestMethod.Get, url, urlParams);
     console.log(requestOptions);
 
-    let rtnObsable = this.http.request(new Request(requestOptions));
-    rtnObsable.subscribe(
-      this.requestObserver
-    );
-    return rtnObsable;
 
+    let rtnObsable = this.http.request(new Request(requestOptions))
+      .map(data=> {
+        this.requestObserver.next(data);
+        return data;
+      });
+    return rtnObsable
+  }
+
+
+  getBinary(url:string, urlParams?:URLSearchParams):Observable<any>{
+    let requestOptions = this.getRequestOptions(RequestMethod.Get, url, urlParams);
+    requestOptions.responseType = 3;
+
+    let rtnObsable = this.http.request(new Request(requestOptions))
+      .map(data=> {
+        this.requestObserver.next(data);
+        return data;
+      });
+    return rtnObsable
   }
 
   request(url:string, body:Object):Observable<any>{

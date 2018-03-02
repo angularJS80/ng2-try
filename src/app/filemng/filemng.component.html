@@ -33,7 +33,7 @@
 
             <div class="video-control">
 
-              <p><a  href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" download="{{fileitem.originalname}}.mp4">
+              <p><a  (click)="downlloadfile(fileitem)" download="{{fileitem.originalname}}.mp4">
                 <i class="glyphicon glyphicon-download-alt" ></i>
 
               </a>
