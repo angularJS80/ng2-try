@@ -17,7 +17,7 @@
           </div>
           <div class="content-flex" >
             <div class="img-container">
-              <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}">
+              <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" >
                 <img src="{{ thumnailUrlRoot+'/'+ fileitem.filepath + '.png'}}">
               </a>
             </div>
@@ -32,13 +32,11 @@
             </div>
 
             <div class="video-control">
-
-              <p><a  (click)="downlloadfile(fileitem)" download="{{fileitem.originalname}}.mp4">
+              <p (click)="downlloadfile(fileitem)" ><a  >
                 <i class="glyphicon glyphicon-download-alt" ></i>
-
               </a>
-              </p>
 
+              </p>
               <p>
                 <i class="glyphicon glyphicon-remove " (click)="removefile(fileitem)"></i>
               </p>

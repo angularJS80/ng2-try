@@ -4,7 +4,6 @@ import {Observer} from "rxjs";
 import {GlobalConst} from "../globalconst";
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
-import * as FileSaver from 'file-saver';
 import {  ConfirmationService} from '@jaspero/ng2-confirmations';
 
 @Component({
@@ -90,10 +89,23 @@ export class FilemngComponent implements OnInit {
 
   filedownloadObserver:Observer<any>=     {
     next: (datas )=>{
+      console.log(JSON.parse(datas._body).filepath);
+      var fileitem = JSON.parse(datas._body);
+      var name = fileitem.originalname +".mp4";
 
-      console.log(datas);
+      if (name && name !=='') {
 
-      FileSaver.saveAs(datas._body,"filename.mp4")
+        var link = document.createElement("a");
+        //link.href = GlobalConst.NODEAPI_ENDPOINT+"/videos/"+ fileitem.filepath;
+        link.href = GlobalConst.NODEAPI_ENDPOINT+"/fileDownload/"+ fileitem._id+"?token="+fileitem.token;
+        link.target = "_blank"
+        link.download = name;
+        console.log(link.href);
+        link.click();
+
+        //link.click();
+      }
+
     } //(this.filelist = datas)
     ,error:(error)=>(console.log(error))
     ,complete:()=>(console.log('complete'))
@@ -132,9 +144,9 @@ export class FilemngComponent implements OnInit {
   }
 
   downlloadfile(fileitem){
-
-console.log(this.thumnailUrlRoot+"/videos/"+fileitem.filepath);
-    this.apirequestService.getBinary("/videos/"+fileitem.filepath).subscribe(
+  console.log(this.thumnailUrlRoot+"/videos/"+fileitem.filepath);
+    this.apirequestService.get("/fileCheck/"+fileitem._id).subscribe(
+    //  this.apirequestService.getPreCheck("/videos/"+fileitem.filepath).subscribe(
      this.filedownloadObserver
     )
   }
