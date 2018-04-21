@@ -5,12 +5,33 @@
 
 <div id="youtube" >
   <div class="row">
+    <div class="col-lg-2 or-col-lg-2 col-md-3 mb-2 ">
+
+
+      <div class="input-group">
+        <input type="search" class="form-control" placeholder="search..." [(ngModel)]="searchModel.searchString"  />
+        <span class="input-group-addon input-group-addon-btn bg-white">
+            <button type="submit" (click)="search()" ><i class="align-middle glyphicon glyphicon-search" aria-hidden="true" ></i>
+            </button>
+        </span>
+      </div>
+
+
+    </div>
+    <div class="col-lg-2 or-col-lg-2 col-md-3 mb-2 ">
+      <i class="align-middle glyphicon glyphicon-download-alt" (click)="downlloadfiles()" ></i>
+      <i class="align-middle glyphicon glyphicon-remove " (click)="removefiles()"></i>
+      <i class="align-middle glyphicon glyphicon-retweet" (click)="encodefiles()"></i>
+      <input type="checkbox" class="align-middle form-check-input" id="checkAll" [(ngModel)]="searchModel.allChecked" (ngModelChange)="checkAll(searchModel.allChecked)">
+
+    </div>
+
+  </div>
+  <div class="row">
+
     <div class="col-lg-4 or-col-lg-4 col-md-6 mb-4 " *ngFor="let fileitem of filelist; let i = index">
       <div class="card  card-cascade wider" >
-
         <div class="card-body">
-
-
 
           <div class="listprogress" style="margin-bottom: 0;">
             <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': fileitem.progress + '%' }"></div>
@@ -43,6 +64,8 @@
               <p>
                 <i class="glyphicon glyphicon-retweet" (click)="encodefile(fileitem)"></i>
               </p>
+              <p>
+                <input type="checkbox" class="form-check-input" id="exampleCheck1" [(ngModel)]="fileitem.checked" >
 
             </div>
 

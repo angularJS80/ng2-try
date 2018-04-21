@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ApiRequestService} from "../_services/apiRequest.service";
+import {ApiRequestService} from "../_services/apiRequest.service"
 import {Observer} from "rxjs";
 import {GlobalConst} from "../globalconst";
 import * as io from 'socket.io-client';
@@ -12,6 +12,7 @@ import {  ConfirmationService} from '@jaspero/ng2-confirmations';
   styleUrls: ['./filemng.component.css']
 })
 export class FilemngComponent implements OnInit {
+  searchModel={allChecked:Boolean,searchString:String};
   filelist:Array<any> = [];
   thumnailUrlRoot:string;
   socket ;
@@ -20,6 +21,8 @@ export class FilemngComponent implements OnInit {
     apirequestService.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
     this.thumnailUrlRoot = GlobalConst.NODEAPI_ENDPOINT;
     this.socket = io(GlobalConst.NODE_ENDPOINT);
+    //this.searchModel.searchString='';
+
   }
 
   getMsgs(file_id) {
@@ -151,6 +154,29 @@ export class FilemngComponent implements OnInit {
     )
   }
 
+  downlloadfiles(){
+    var checkList = this.filelist.filter((fileItem: any)=>{
+      return fileItem.checked==true;
+    });
+
+    checkList.forEach(fileItem=>{
+        this.downlloadfile(fileItem);
+      }
+    )
+  }
+
+  checkAll(allChecked:Boolean){
+    console.log(allChecked);
+    this.filelist.forEach((fileItem) => {
+      fileItem.checked = allChecked;
+    });
+  }
+  search(){
+    this.apirequestService.request("/fileList",this.searchModel).subscribe(
+      this.filelistObserver
+    );
+  }
+
 
   encodefile(fileitem){
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
@@ -161,9 +187,10 @@ export class FilemngComponent implements OnInit {
 
   ngOnInit() {
     console.log("test ngOninit");
-    this.apirequestService.get("/fileList").subscribe(
+    this.apirequestService.request("/fileList",this.searchModel).subscribe(
       this.filelistObserver
     )
+
   }
   ngOnDestroy() {
     this.connections.forEach(connection=>{
