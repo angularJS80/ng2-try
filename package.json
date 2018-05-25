@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "^5.0.0",
     "@angular/router": "^5.0.0",
     "@firebase/app-types": "^0.1.1",
+    "@jaspero/ng2-confirmations": "^0.3.3",
     "@types/video.js": "^6.2.3",
     "@types/videojs": "^5.16.2",
     "angular-gauge": "^3.0.0",
