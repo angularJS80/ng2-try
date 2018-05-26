@@ -13,7 +13,7 @@ import {AttachComponent} from "./attach/attach.component";
 import {FilemngComponent} from "./filemng/filemng.component";
 import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component";
 import {UtbattachComponent} from "./utbattach/utbattach.component";
-
+import {TempmngComponent} from "./tempmng/tempmng.component";
 
 const routes: Routes = [
   { path: '', redirectTo: '/filelist', pathMatch: 'full' },
@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'attachUtbUrl', component: UtbattachComponent},
   { path: 'filelist', component: FilemngComponent},
   { path: 'smartplay', component: SmartPlaylistComponent},
-
+  { path: 'tempmng', component: TempmngComponent},
 
 
 ];
