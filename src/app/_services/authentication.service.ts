@@ -11,12 +11,13 @@ export class AuthenticationService {
         private router: Router,
         private apirequestService:ApiRequestService
     ) {
+
       //this.apirequestService.setbaseApiPath = GlobalConst.HEROAPI_ENDPOINT;
       this.apirequestService.setbaseApiPath = GlobalConst.NODE_ENDPOINT;
     }
   //headers = new Headers({'Content-Type': 'application/json'});
     login(username: string, password: string) {
-       // return this.apirequestService.request('/api/authenticate', { username: username, password: password })
+        //return this.apirequestService.request('/api/authenticate', { username: username, password: password })
           return this.apirequestService.request('/openapi/authenticate', { username: username, password: password })
             .map((response: Response) => {
               console.log(response);
@@ -34,7 +35,7 @@ export class AuthenticationService {
     logout() {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
-        
+
         this.router.navigate(['/login']);
     }
 }

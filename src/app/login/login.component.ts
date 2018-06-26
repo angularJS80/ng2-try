@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         private _confirmation: ConfirmationService,
         private messageService: MessageService) {
          apirequestService.setbaseApiPath = GlobalConst.NODE_ENDPOINT;
-
+      //apirequestService.setbaseApiPath = GlobalConst.HEROAPI_ENDPOINT;
 
     }
 

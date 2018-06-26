@@ -52,7 +52,7 @@ import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component"
 import {VgBufferingModule} from "videogular2/src/buffering/buffering";
 import { UtbattachComponent } from './utbattach/utbattach.component';
 import { TempmngComponent } from './tempmng/tempmng.component';
-
+import  {WindowRef} from './window.ref'
 
 
 const firebaseAuth = {
@@ -105,6 +105,7 @@ const firebaseAuth = {
     VgBufferingModule,
     JasperoConfirmationsModule,
     BrowserAnimationsModule,
+
    // MaterialModule.forRoot()
   ],
 
@@ -120,6 +121,7 @@ const firebaseAuth = {
     ItemService,
     TodoService,
     ChatService,
+    WindowRef,
   ],
   bootstrap: [AppComponent]
 })

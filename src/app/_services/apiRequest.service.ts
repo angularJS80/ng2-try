@@ -109,7 +109,7 @@ export class ApiRequestService {
       xhr.open("GET", requestUrl, true);
       xhr.onreadystatechange = function () {
         if (xhr.readyState==2 && xhr.status == 200) {
-          observer.next(xhr.response);
+          observer.next(xhr.response);p
           //observer.completed();
         } else {
           //observer.error(xhr.response);

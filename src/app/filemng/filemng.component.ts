@@ -5,7 +5,7 @@ import {GlobalConst} from "../globalconst";
 import * as io from 'socket.io-client';
 import { Observable } from 'rxjs/Observable';
 import {  ConfirmationService} from '@jaspero/ng2-confirmations';
-
+import { WindowRef } from './../window.ref';
 @Component({
   selector: 'app-filemng',
   templateUrl: './filemng.component.html',
@@ -17,10 +17,13 @@ export class FilemngComponent implements OnInit {
   thumnailUrlRoot:string;
   socket ;
   connections:Array<any> =[];
-  constructor(public apirequestService:ApiRequestService ,private _confirmation: ConfirmationService) {
+  window;
+  constructor(public apirequestService:ApiRequestService ,private _confirmation: ConfirmationService,private angularWindow:WindowRef) {
     apirequestService.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
     this.thumnailUrlRoot = GlobalConst.NODEAPI_ENDPOINT;
     this.socket = io(GlobalConst.NODE_ENDPOINT);
+    this.window = angularWindow.nativeWindow;
+
     //this.searchModel.searchString='';
 
   }
@@ -46,6 +49,16 @@ export class FilemngComponent implements OnInit {
       this.filelist = JSON.parse(datas._body);
       console.log(this.filelist);
       var cnt = 0;
+     // console.log(this.window.appCallByJs.doAndroidToast);
+
+
+
+
+
+      //this.window.appCallByJs.doAndroidToast('test');
+
+
+
       this.filelist.forEach(item=>{
 
         if(item.encodests =='P'){
@@ -126,6 +139,7 @@ export class FilemngComponent implements OnInit {
     }
   }
 
+
   removefile(fileitem){
     var conset:ConfirmSettings = {
       overlay: false,
@@ -191,6 +205,7 @@ export class FilemngComponent implements OnInit {
       this.filelistObserver
     )
 
+
   }
   ngOnDestroy() {
     this.connections.forEach(connection=>{
@@ -200,6 +215,9 @@ export class FilemngComponent implements OnInit {
   }
 
 }
+
+
+
 
 export interface ResolveEmit {
   // Returns this if modal resolved with yes or no
