@@ -186,9 +186,7 @@ export class FilemngComponent implements OnInit {
     });
   }
   search(){
-    this.apirequestService.request("/fileList",this.searchModel).subscribe(
-      this.filelistObserver
-    );
+    this.apirequestService.requestNew("/fileList",this.searchModel, this.filelistObserver)
   }
 
 

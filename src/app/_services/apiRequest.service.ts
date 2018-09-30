@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { Observable} from 'rxjs/Observable';
 import {Observer} from "rxjs";
 
+import {GlobalConst} from "../globalconst";
 @Injectable()
 export class ApiRequestService {
 
@@ -16,16 +17,19 @@ export class ApiRequestService {
 
   requestObserver:Observer<any>=     {
     next: (datas )=>{
-      console.log("api request : datas"+datas)
+
+
     }
     ,error:(error)=>{
       console.log("api request error : "+error)
       if (error.status === 401){
+
+
         this.router.navigate(['/logout']);
       }
 
       if (error.status === 403){
-        this.router.navigate(['/login']);
+
       }
 
 
@@ -56,6 +60,29 @@ export class ApiRequestService {
       headers.append("Authorization", token);
     }
     return headers;
+  }
+
+  refreshToken(observer:Observer<any>,url:string, body:Object){
+    this.setbaseApiPath = GlobalConst.NODE_ENDPOINT;
+    let requestOptions = this.getRequestOptions(RequestMethod.Post, '/openapi/refreshToken', undefined, {test:"test"});
+    console.log(requestOptions);
+    this.setbaseApiPath = GlobalConst.NODEAPI_ENDPOINT;
+    this.http.request(new Request(requestOptions))
+      .map(data=> {
+        let user = data.json();
+
+         if (user && user.token) {
+         // store user details and jwt token in local storage to keep user logged in between page refreshes
+         localStorage.setItem('currentUser', JSON.stringify(user));
+          //this.requestNew(url,body,observer);
+         }else{
+          this.router.navigate(['/login']);
+         }
+
+        return data;
+      }).subscribe(this.requestObserver);
+
+
   }
 
   getRequestOptions(requestMethod, url:string, urlParam?:URLSearchParams, body?:Object):RequestOptions {
@@ -204,9 +231,45 @@ export class ApiRequestService {
     let rtnObsable = this.http.request(new Request(requestOptions))
       .map(data=> {
         this.requestObserver.next(data);
+        // 위에서 재발급요청을 해도
+        // 아래에 는 계속 진행됨으로 오류가 발생 중단하고 재발급 요청을 타도록 변경해야
         return data;
       });
+    //rtnObsable.subscribe(this.requestObserver);
     return rtnObsable
+  }
+
+  requestNew(url:string, body:Object,observer:Observer<any>):void{
+    let requestOptions = this.getRequestOptions(RequestMethod.Post, url, undefined, body);
+    //console.log(this.http.request(this.baseApiPath+url,requestOptions));
+
+    let rtnObsable ;
+    console.log("cant add map");
+    rtnObsable = this.http.request(new Request(requestOptions)).map(data=> {
+      console.log("###################################rtnObsable")
+      console.log(rtnObsable);
+
+      this.authCheck(data,rtnObsable,observer,url, body);
+        //this.requestObserver.next(data);
+        // 위에서 재발급요청을 해도
+        // 아래에 는 계속 진행됨으로 오류가 발생 중단하고 재발급 요청을 타도록 변경해야
+        return data;
+      });
+    rtnObsable.subscribe(this.requestObserver);
+  }
+
+  authCheck(data:Object,observale:Observable<any>,observer:Observer<any>,url:string, body:Object){
+    console.log("authCheck######################");
+    console.log(data)
+    console.log("api request : datas"+JSON.parse(data["_body"]))
+    console.log(JSON.parse(data["_body"]).error.status );
+    if(JSON.parse(data["_body"]).error && JSON.parse(data["_body"]).error.status ==403){
+      console.log("api request error : ")
+      console.log(JSON.parse(data["_body"]).error)
+      this.refreshToken(observer,url, body);
+    }else{
+      observale.subscribe(observer);
+    }
   }
 
   put(url:string, body:Object):Observable<any>{
