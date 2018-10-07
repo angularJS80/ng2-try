@@ -107,11 +107,11 @@ export class FilemngComponent implements OnInit {
     next: (datas )=>{
       console.log(JSON.parse(datas._body).filepath);
       var fileitem = JSON.parse(datas._body);
-      console.log(
-        var fileExt = ".mp4"
-        if(fileitem.filepath.indexOf("mp3")>0){
-          fileExt = ".mp3"
-        };
+
+      var fileExt = ".mp4";
+      if(fileitem.filepath.indexOf("mp3")>0){
+        fileExt = ".mp3";
+      }
 
       var name = fileitem.originalname +fileExt;
       console.log(name);
@@ -197,7 +197,7 @@ export class FilemngComponent implements OnInit {
     )
   }
 
-  checkAll(allChecked:Boolean){
+  checkAll(allChecked){
     console.log(allChecked);
     this.filelist.forEach((fileItem) => {
       fileItem.checked = allChecked;
@@ -213,9 +213,21 @@ export class FilemngComponent implements OnInit {
       this.fileaddObserver
     )
   }
+
   encodefile(fileitem){
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
       this.fileaddObserver
+    )
+  }
+
+  encodefiles(){
+    var checkList = this.filelist.filter((fileItem: any)=>{
+      return fileItem.checked==true;
+    });
+
+    checkList.forEach(fileItem=>{
+        this.encodefile(fileItem);
+      }
     )
   }
 
