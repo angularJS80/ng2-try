@@ -107,15 +107,21 @@ export class FilemngComponent implements OnInit {
     next: (datas )=>{
       console.log(JSON.parse(datas._body).filepath);
       var fileitem = JSON.parse(datas._body);
-      var name = fileitem.originalname +".mp4";
+      console.log(
+        var fileExt = ".mp4"
+        if(fileitem.filepath.indexOf("mp3")>0){
+          fileExt = ".mp3"
+        };
 
+      var name = fileitem.originalname +fileExt;
+      console.log(name);
       if (name && name !=='') {
 
         var link = document.createElement("a");
         //link.href = GlobalConst.NODEAPI_ENDPOINT+"/videos/"+ fileitem.filepath;
         link.href = GlobalConst.NODEAPI_ENDPOINT+"/fileDownload/"+ fileitem._id+"?token="+fileitem.token;
         link.target = "_blank"
-        link.download = name;
+        //link.download = name;
         console.log(link.href);
         link.click();
 
@@ -160,6 +166,18 @@ export class FilemngComponent implements OnInit {
       })
   }
 
+  removefiles(){
+    var checkList = this.filelist.filter((fileItem: any)=>{
+      return fileItem.checked==true;
+    });
+
+    checkList.forEach(fileItem=>{
+        this.removefile(fileItem);
+      }
+    )
+  }
+
+
   downlloadfile(fileitem){
   console.log(this.thumnailUrlRoot+"/videos/"+fileitem.filepath);
     this.apirequestService.get("/fileCheck/"+fileitem._id).subscribe(
@@ -190,11 +208,15 @@ export class FilemngComponent implements OnInit {
   }
 
 
+  encodeMp3file(fileitem){
+    this.apirequestService.request("/encodeMp3file/",fileitem).subscribe(
+      this.fileaddObserver
+    )
+  }
   encodefile(fileitem){
     this.apirequestService.request("/encodeVideo/",fileitem).subscribe(
       this.fileaddObserver
     )
-
   }
 
   ngOnInit() {
