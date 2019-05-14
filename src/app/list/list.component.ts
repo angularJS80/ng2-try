@@ -151,9 +151,6 @@ export class ListComponent implements OnInit {
 
   observerbleOnKeyUp(event){
     if(this.txt_OnKeyUpObserable==null){
-
-
-
       this.txt_OnKeyUpObserable = Observable.fromEvent(event.target, 'keyup') // 지정된 타겟 이벤트에 클릭이 발생되었다면 ?
 
         .pluck('targt','value')

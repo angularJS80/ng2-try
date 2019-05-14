@@ -44,9 +44,9 @@ import {FileUploadModule} from "ng2-file-upload";
 import { AttachComponent } from './attach/attach.component';
 import { FilemngComponent } from './filemng/filemng.component';
 import {LimitToPipe} from "./pipe/limit-to.pipe";
-import {SchComponent} from './sch/sch.component';
-import {TempmngComponent} from './tempmng/tempmng.component';
-import {DailyschComponent} from './dailysch/dailysch.component'
+//import {SchComponent} from './sch/sch.component';
+//import {TempmngComponent} from './tempmng/tempmng.component';
+//import {DailyschComponent} from './dailysch/dailysch.component'
 /*angular movie*/
 import { VgCoreModule } from 'videogular2/core';
 import { VgControlsModule } from 'videogular2/controls';
@@ -87,9 +87,9 @@ const firebaseAuth = {
     SmartPlaylistComponent,
     UtbattachComponent,
       LimitToPipe,
-    SchComponent,
-    TempmngComponent,
-    DailyschComponent
+    //SchComponent,
+    //TempmngComponent,
+    //DailyschComponent
   ],
   imports: [
     BrowserModule,

@@ -1,34 +1,47 @@
 <h1>Accordion</h1>
 <app-item *ngFor="let item of list" [item]="item"></app-item>
 
-<!--<ul>
-<li *ngFor="let sueprHero of superHeroList" >{{sueprHero.name}}</li>
-</ul>-->
+<div class="row">
+
+  <div class="col-lg-4 or-col-lg-4 col-md-6 mb-4 ">
+    <div class="card  card-cascade wider" >
+      <div class="card-body">
+
+        <div class="content-flex" >
+
+          <div class="video-control">
+            observerbleCreate 기역없음..
+            <i class="glyphicon glyphicon-play" (click)="observerbleCreateTest()"></i>
+
+          </div>
+
+          <div class="video-control">
+            observerbleInterval
+              <i class="glyphicon glyphicon-play" (click)="observerbleIntercalTest()"></i>
+              <i class="glyphicon glyphicon-stop" (click)="observerbleIntercalTestStop()"></i>
+          </div>
+
+          <div class="video-control">
+            observerble subsriber Add
+            <i class="glyphicon glyphicon-play" (click)="observeTest()"></i>
+            <i class="glyphicon glyphicon-stop" (click)="stopAllsubscribe()"></i>
+            <i class="glyphicon glyphicon-plus" (click)="addSubscribe()"></i>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
 
 <input type="text" (keyup)="observerbleOnKeyUp($event)" />
 
-<button (click)="observeTest()">observerTest</button>
-<button (click)="stopAllsubscribe()">stopAllsubscribe</button>
-<button (click)="addSubscribe()">addSubscribe</button>
-
 <button (click)="changeValStatus()">observerTestchangeValStatus</button>
-<button (click)="ObsavleTest($event)">Obserable Test</button>
-
 <button (click)="observerbleReduce()">Obserable Test observerbleReduce</button>
 <button (click)="observerbleScan()">Obserable Test observerbleScan</button>
-
-
-<button (click)="observerbleCreateTest()">observerbleCreateTest</button>
-
-<button (click)="observerbleIntercalTest()">observerbleIntercalTest</button>
-<button (click)="observerbleIntercalTestStop()">observerbleIntercalTestStop</button>
-
-
-
-
-
-
-
 
 
 {{re}}
