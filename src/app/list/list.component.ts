@@ -33,26 +33,7 @@ export class ListComponent implements OnInit {
     .fromEvent(this.obsableTest_buttonEventTarget, 'click') // 지정된 타겟 이벤트에 클릭이 발생되었다면 ?
   txt_OnKeyUpObserable;
 
-  intervvalEventObservable:any =
-    Observable
-      .interval(
-        1000 // 1초마다 수행되고
-      )
-      .map(
-        (value)=>{
-          return value*2; // 두배로 가공하여
-        }
-      )
-      .throttleTime(2000) // 2초에 한번 구독시킨다
-      .filter(
-        (value)=>{
-          console.log(value);
-          return value%3==0; // 필터로 3으로 나눈 나머지가 0일때 만 베터 낸다
-        });
-      /*.subscribe(
-        this.btn_clickObserver
-      );*/
-
+  intervvalEventObservable:any
   btn_ReduauceEventObserable = Observable//.fromEvent(event.target, 'click') // 지정된 타겟 이벤트에 클릭이 발생되었다면 ?
   .of(1,2,3,4,5)
   .reduce((total,current)=>{return total+current},0)
@@ -187,9 +168,24 @@ export class ListComponent implements OnInit {
   // 2 옵저블에 인터벌로 데이터 발생시 옵저버의 next 가 수행된다.
   observerbleIntercalTest(){
     // 구독을 취소 시키기 위해 변수를 갱신해야 한다.
-    this.intervvalEventObservable.subscribe(
+    this.intervvalEventObservable =
+      Observable
+        .interval(
+          1000 // 1초마다 수행되고
+        )
+        .map(
+          (value)=>{
+            return value*2; // 두배로 가공하여
+          }
+        )
+        .throttleTime(2000) // 2초에 한번 구독시킨다
+        .filter(
+          (value)=>{
+            console.log(value);
+            return value%3==0; // 필터로 3으로 나눈 나머지가 0일때 만 베터 낸다
+          }).subscribe(
       this.btn_clickObserver
-    );
+    )
   }
 
   observerbleIntercalTestStop(){
