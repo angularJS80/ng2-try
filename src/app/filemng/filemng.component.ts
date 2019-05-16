@@ -12,7 +12,10 @@ import { WindowRef } from './../window.ref';
   styleUrls: ['./filemng.component.css']
 })
 export class FilemngComponent implements OnInit {
-  searchModel={allChecked:Boolean,searchString:String};
+  searchModel={
+     allChecked:false
+    ,searchString:""
+  };
   filelist:Array<any> = [];
   thumnailUrlRoot:string;
   socket ;
@@ -23,8 +26,6 @@ export class FilemngComponent implements OnInit {
     this.thumnailUrlRoot = GlobalConst.NODEAPI_ENDPOINT;
     this.socket = io(GlobalConst.NODE_ENDPOINT);
     this.window = angularWindow.nativeWindow;
-
-    //this.searchModel.searchString='';
 
   }
 
@@ -49,15 +50,6 @@ export class FilemngComponent implements OnInit {
       this.filelist = JSON.parse(datas._body);
       console.log(this.filelist);
       var cnt = 0;
-     // console.log(this.window.appCallByJs.doAndroidToast);
-
-
-
-
-
-      //this.window.appCallByJs.doAndroidToast('test');
-
-
 
       this.filelist.forEach(item=>{
 
@@ -243,7 +235,9 @@ export class FilemngComponent implements OnInit {
     });
   }
   search(){
-    this.apirequestService.requestNew("/fileList",this.searchModel, this.filelistObserver)
+    this.apirequestService.request("/fileList",this.searchModel).subscribe(
+      this.filelistObserver
+    )
   }
 
 
@@ -272,9 +266,7 @@ export class FilemngComponent implements OnInit {
 
   ngOnInit() {
     console.log("test ngOninit");
-    this.apirequestService.request("/fileList",this.searchModel).subscribe(
-      this.filelistObserver
-    )
+    this.search()
 
 
   }
