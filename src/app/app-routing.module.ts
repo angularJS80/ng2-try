@@ -15,7 +15,7 @@ import {SmartPlaylistComponent} from "./smart-playlist/smart-playlist.component"
 import {UtbattachComponent} from "./utbattach/utbattach.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/filelist', pathMatch: 'full' },
+  //{ path: '', redirectTo: '/filelist', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
   { path: 'runstate', component: RunstateComponent },
   { path: 'detail/:heroStr', component: HeroDetailComponent },
