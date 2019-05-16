@@ -102,6 +102,36 @@ export class FilemngComponent implements OnInit {
     ,complete:()=>(console.log('complete'))
   }
 
+  filelinkloadObserver:Observer<any>=     {
+    next: (datas )=>{
+      console.log(JSON.parse(datas._body).filepath);
+      var fileitem = JSON.parse(datas._body);
+
+      var fileExt = ".mp4";
+      if(fileitem.filepath.indexOf("mp3")>0){
+        fileExt = ".mp3";
+      }
+
+
+      var name = fileitem.originalname +fileExt;
+      console.log(name);
+      if (name && name !=='') {
+
+        var link = document.createElement("a");
+        //link.href = GlobalConst.NODEAPI_ENDPOINT+"/videos/"+ fileitem.filepath;
+        link.href = GlobalConst.NODEAPI_ENDPOINT+"/videos/"+ fileitem.filepath;
+        link.target = "_blank"
+        //link.download = name;
+        console.log(link.href);
+        link.click();
+
+        //link.click();
+      }
+
+    } //(this.filelist = datas)
+    ,error:(error)=>(console.log(error))
+    ,complete:()=>(console.log('complete'))
+  }
 
   filedownloadObserver:Observer<any>=     {
     next: (datas )=>{
@@ -185,6 +215,15 @@ export class FilemngComponent implements OnInit {
      this.filedownloadObserver
     )
   }
+
+  linkloadfile(fileitem){
+    console.log(this.thumnailUrlRoot+"/videos/"+fileitem.filepath);
+    this.apirequestService.get("/fileCheck/"+fileitem._id).subscribe(
+      //  this.apirequestService.getPreCheck("/videos/"+fileitem.filepath).subscribe(
+      this.filelinkloadObserver
+    )
+  }
+
 
   downlloadfiles(){
     var checkList = this.filelist.filter((fileItem: any)=>{

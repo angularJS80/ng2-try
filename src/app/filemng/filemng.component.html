@@ -38,9 +38,9 @@
           </div>
           <div class="content-flex" >
             <div class="img-container">
-              <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" >
-                <img src="{{ thumnailUrlRoot+'/'+ fileitem.filepath + '.png'}}">
-              </a>
+<!--              <a href="{{ thumnailUrlRoot}}/videos/{{fileitem.filepath}}" >-->
+                <img src="{{ thumnailUrlRoot+'/'+ fileitem.filepath + '.png'}}" (click)="linkloadfile(fileitem)">
+<!--              </a>-->
             </div>
             <div class="video-desc">
 
