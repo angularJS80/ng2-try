@@ -55,6 +55,7 @@ import {VgBufferingModule} from "videogular2/src/buffering/buffering";
 import { UtbattachComponent } from './utbattach/utbattach.component';
 import  {WindowRef} from './window.ref'
 
+import {LocationStrategy,HashLocationStrategy} from "@angular/common";
 
 const firebaseAuth = {
   apiKey: "AIzaSyCVh5eTAp7HZhnak_uAoS-LvK3xHqXt9lM",
@@ -125,7 +126,10 @@ const firebaseAuth = {
     TodoService,
     ChatService,
     WindowRef,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
+
   bootstrap: [AppComponent]
+
 })
 export class AppModule { }
