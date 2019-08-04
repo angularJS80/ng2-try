@@ -15,15 +15,15 @@
         <button class="btn btn-primary " >
           <span class="align-middle glyphicon glyphicon-download-alt" (click)="downlloadfiles()" ></span>
         </button>
-        <button class="btn btn-primary " >
+        <button class="btn btn-danger " >
           <span class="align-middle glyphicon glyphicon-trash " (click)="removefiles()"></span>
         </button>
-        <button class="btn btn-primary " >
+        <button class="btn btn-warning " >
           <span class="align-middle glyphicon glyphicon-facetime-video" (click)="encodefiles()"></span>
         </button>
-        <button class="btn btn-primary " >
+        <!--<button class="btn btn-info " >
           <span class="align-middle glyphicon glyphicon-headphones" (click)="encodeMp3file()"></span>
-        </button>
+        </button>-->
         <button class="btn btn-primary " >
         <input type="checkbox" class="align-middle form-check-input" id="checkAll" [(ngModel)]="searchModel.allChecked" (ngModelChange)="checkAll(searchModel.allChecked)">
         </button>

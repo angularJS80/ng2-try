@@ -1,0 +1,9 @@
+version: '3'
+services:
+  nginxAngular:
+    image: nginx:nginxAlgular
+    build: ./
+    ports:
+      - "24200:80"
+    volumes:
+    - ./ngdist:/usr/share/nginx/html
